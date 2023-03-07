@@ -4,8 +4,10 @@ import { fetchQuizQuestions } from "./API";
 import QuestionCard from "./components/QuestionCard";
 // Types
 import { QuestionState, Difficulty } from "./API";
+// Styles
+import { GlobalStyle, Wrapper, QuestionCardWrapper } from "./App.styles";
 
-type AnswerObject = {
+export type AnswerObject = {
   question: string;
   answer: string;
   correct: boolean;
@@ -57,11 +59,22 @@ const App: React.FC = () => {
     }
   };
 
-  const nextQuestion = () => {};
+  const nextQuestion = () => {
+    // Move on to the next question if not the last question
+    const nextQuestion = number + 1;
+
+    if (nextQuestion === TOTAL_QUESTIONS) {
+      setGameOver(true);
+    } else {
+      setNumber(nextQuestion);
+    }
+  };
 
   return (
-    <div className="App">
-      <h1>Trivia U</h1>
+    <>
+    <GlobalStyle />
+    <Wrapper>
+      <h1>The Dave Trivia Experience</h1>
       {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
         <button className="start" onClick={startTrivia}>
           Start
@@ -70,6 +83,7 @@ const App: React.FC = () => {
       {!gameOver ? <p className="score">Score: {score}</p> : null}
       {!loading ? <p>Loading Questions...</p> : null}
       {!loading && !gameOver && (
+      <QuestionCardWrapper>
       <QuestionCard
         questionNr={number + 1}
         totalQuestions={TOTAL_QUESTIONS}
@@ -78,13 +92,15 @@ const App: React.FC = () => {
         userAnswer={userAnswers ? userAnswers[number] : undefined}
         callback={checkAnswer}
       />
+      </QuestionCardWrapper>
       )}
       {!gameOver && !loading && userAnswers.length === number + 1 && number !== TOTAL_QUESTIONS - 1 ? (
       <button className="next" onClick={nextQuestion}>
         Next Question
       </button>
       ) : null }
-    </div>
+    </Wrapper>
+    </>
   );
 };
 
