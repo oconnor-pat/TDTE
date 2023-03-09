@@ -10,11 +10,13 @@ export const GlobalStyle = createGlobalStyle`
         background-image: url(${trivianight2});
         background-size: cover;
         image-rendering: optimizeQuality;
+        background-position: center center;
+        background-repeat: no-repeat;
         margin: 0;
         padding: 0 20px;
         display: flex;
         justify-content: center;
-        }
+    }
 
         * {
             box-sizing: border-box;
@@ -61,7 +63,27 @@ export const Wrapper = styled.div`
     .start {
         max-width: 200px;
     }
-    `
+
+    @media only screen and (min-width: 390px) and (max-height: 844px) and (-webkit-device-pixel-ratio: 3) {
+        h1 {
+            font-size: 25px;
+        }
+
+        .start, .next {
+            height: 20px;
+            margin: 10px 0;
+            padding: 0 20px;
+        }
+
+        .start {
+            max-width: 100px;
+        }
+
+        .score {
+            font-size: 1rem;
+        }
+    }
+    `;
 
 export const QuestionCardWrapper = styled.div`
     background: ##00FFFF;
@@ -71,11 +93,6 @@ export const QuestionCardWrapper = styled.div`
     padding: 20px;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
     text-align: center;
-    
-    p {
-        font-size: 1rem;
-        color: #fff;
-        }
 
     .number {
         color: #A020F0;
@@ -98,4 +115,20 @@ export const QuestionCardWrapper = styled.div`
             margin: 20px 0;
             padding: 0 40px;
         }
+
+        @media only screen and (min-width: 390px) and (max-height: 844px) and (-webkit-device-pixel-ratio: 3) {
+            .number {
+                font-size: 1.0rem;
+            }
+
+            .individualquestion {
+                font-size: 1.0rem;
+                text-align: center;
+            }
+
+            .questioncardbutton {
+                height: 20px;
+                margin: 10px 0;
+                padding: 0 20px;
+            }
         `;
